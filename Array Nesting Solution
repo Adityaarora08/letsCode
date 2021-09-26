@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int arrayNesting(vector<int>& nums) {
+        int k=0;
+        int count=0;
+        int d=0;
+        for(d=0;d<nums.size();d++){
+            int s[50]={0};
+            k=0;
+        for(;;)
+        {
+            s[k]=nums[d];
+            d=s[k];
+            for(int i=0;i<k;i++)
+            {
+                if(d==s[i])
+                    goto exit;
+            }
+            k++;
+        }
+            exit:
+            if(k>=count)
+            {count=k;}
+            continue;
+        }
+    return count;
+    }
+};
