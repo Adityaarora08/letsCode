@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+      int count =0;
+          int j=0;
+        int i=0,b;
+        int n=text1.length();
+        int u=text2.length();
+        int m=0;
+                while(j<u)
+                {
+                while(i<n)
+                {
+                if(text1[i]==text2[j])
+                {
+                count++;
+                j++; 
+                }
+                if(b>=i)
+                {
+                count--; 
+                b=i;
+                }
+                i++; 
+                }
+                }
+                return count;
+    }
+};
