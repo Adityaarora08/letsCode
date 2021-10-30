@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int contigious_sum=0,i,peak=nums[0];
+        
+        for(i=0;i<nums.size();i++){
+            contigious_sum+=nums[i];
+            
+            if(contigious_sum>peak){
+                peak=contigious_sum;
+                
+            if(contigious_sum<0){
+                    contigious_sum=0;                
+                }
+            }
+            else if(contigious_sum<0){
+                contigious_sum=0;                
+            }
+        }
+        return peak;
+    }
+};
