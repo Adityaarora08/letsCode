@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c) {
+       int a=mat.size();
+        int b=mat[0].size(); 
+        vector<vector<int>> ans;
+        if(r*c==a*b)
+        {
+            int i=0;
+            int q=0,w=0;
+            while(i<r)
+            {
+                int j=0;
+                vector<int> v1;
+                while(j<c)
+                {
+                   if(w<b)
+                   {
+                       v1.push_back(mat[q][w]);
+                       ++w;
+                   }
+                    else
+                    {
+                        ++q;
+                        w=0;
+                        v1.push_back(mat[q][w]);
+                        w++;
+                    }
+                   j++; 
+                }
+                ans.push_back(v1);
+                i++;
+            }
+            return ans;
+        }
+        else
+            return mat;
+    }
+};
