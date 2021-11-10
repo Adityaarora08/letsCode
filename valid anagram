@@ -1,1 +1,26 @@
-
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+       unordered_map<char, int> map1; 
+        int n=s.length();
+        int a=t.length();
+        if(a!=n)
+            return false;
+        for(int i=0;i<n;i++)
+        {
+            map1[s[i]]=0;
+        }
+        for(int i=0;i<n;i++)
+        {
+                map1[s[i]]+=1;
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(map1[t[i]]>0)
+                map1[t[i]]-=1;
+            else
+                return false;
+        }
+        return true;
+    }
+};
