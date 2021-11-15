@@ -1,1 +1,57 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        // Edge Cases
+        if (nums.size() == 0) {
+            return -1;
+        }
+        
+        if (nums.size() == 1) {
+            if (nums[0] == target) {
+                return 0;
+            }
+            if (nums[0] == target) {
+                return -1;
+            }             
+        }
+        
+        
+        int low = 0;
+        int high = nums.size() - 1;
+        int mid;
+		
+		// Find the index of the smallest element, which is the same as the index of the rotated point.
+        while (low < high) {
+            mid = (low + high)/2;
+            
+            if (nums[mid] > nums[high]) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        int start = low; 
+        low = 0;
+        high = nums.size() - 1;
+        //  Decide the array indices for a regular binary search
+        if (target >= nums[start] && target <= nums[high]) {
+            low = start;
+        } else {
+            high = start;
+        }
+        while (low <= high) {
+            
+            mid = (low + high) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            }
+            else if (nums[mid] > target) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
 
+        return -1;
+    }
+};
