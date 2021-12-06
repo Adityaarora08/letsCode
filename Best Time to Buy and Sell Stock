@@ -9,7 +9,7 @@ public:
         {
             mini=min(mini,prices[i]);
             if(diff<(prices[i]-mini))
-                    diff = (prices[i]-mini);
+                    diff = (prices[i]-mini); //dvns kjb fv
             i++;
                 
         }
