@@ -1,1 +1,1 @@
-# Daily Programming in C++ and Java
+# Daily Programming C++ and Java 
