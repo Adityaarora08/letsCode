@@ -1,0 +1,54 @@
+// C++ program for the above approach
+#include <bits/stdc++.h>
+using namespace std;
+
+// Recursive function to use implicit stack
+// to insert an element at the bottom of stack
+stack<int> recur(stack<int> S, int N)
+{
+	// If stack is empty
+	if (S.empty())
+		S.push(N);
+
+	else{
+		int x= S.top();
+		S.pop();
+		S= recur(S,N);
+		S.push(x);
+	}
+	return S;
+}
+
+// Function to insert an element
+// at the bottom of stack
+void insertToBottom(
+	stack<int> S, int N)
+{
+
+	// Recursively insert
+	// N at the bottom of S
+	S = recur(S, N);
+
+	// Print the stack S
+	while (!S.empty()) {
+		cout << S.top() << " ";
+		S.pop();
+	}
+}
+int main()
+{
+	// Input
+	stack<int> S;
+	S.push(5);
+	S.push(4);
+	S.push(3);
+	S.push(2);
+	S.push(1);
+
+	int N = 7;
+
+	insertToBottom(S, N);
+
+	return 0;
+}
+
