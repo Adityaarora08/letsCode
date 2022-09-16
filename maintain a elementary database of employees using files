@@ -1,0 +1,26 @@
+}
+#include <fstream>
+#include <iostream>
+using namespace std;
+int main()
+{
+    string str;
+    fstream ff;
+    ff.open("1.txt");
+    cout << "Writing to the file" << endl;
+
+    int flag = 1;
+    while (flag)
+    {
+        cout << "Enter your name: ";
+        cin >> str;
+        ff << str << endl;
+        cout << "Enter your age: ";
+        cin >> str;
+        cin.ignore();
+        ff << str << endl;
+        cout << "Enter 1 to enter more details else 0\n";
+        cin >> flag;
+    }
+
+    ff.close();
