@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        // int totalSum=0,low=0;
+        // int arrSize=nums.size()+1;
+        // for(int i=0;i<nums.size();i++){
+        //     totalSum+=nums[i];
+        //     if(totalSum-nums[low]>=target){
+        //             while(totalSum>=target){
+        //             totalSum-=nums[low];
+        //             low++;
+        //         }
+        //         totalSum+=nums[low];
+        //         low--;
+        //     }
+        //     if(totalSum>=target && i-low+1<arrSize){
+        //         arrSize=i-low+1;
+        //         // sum=totalSum;
+        //     }
+        //     // if(target<totalSum){
+        //     //     low++;
+        //     // }
+        // }
+        //     return arrSize;
+        int low=0, i=0, sum=0, ans=nums.size()+1;
+        while(i<nums.size()){
+            sum+=nums[i++];
+            while(sum>=target){
+                ans=min(ans, i-low);
+                sum-=nums[low++];
+            }
+        }
+        return ans%(nums.size()+1);
+    }
+};
