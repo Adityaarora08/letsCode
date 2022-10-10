@@ -1,0 +1,19 @@
+void getVerticals(TreeNode* root,int h,map<int, vector<int> > &m){
+        if(root==NULL){
+            return;
+        }
+        m[h].push_back(root->val);
+        getVerticals(root->left,h-1,m); 
+        getVerticals(root->right,h+1,m);
+    }
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        map<int, vector<int> > m;
+        int h=0;
+        getVerticals(root,h,m);
+        map<int, vector<int> > :: iterator it;
+        vector<vector<int>> ans;
+        for(it=m.begin();it!=m.end();it++){
+            ans.push_back(it->second);
+        }
+        return ans;
+    }
