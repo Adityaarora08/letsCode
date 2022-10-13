@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        vector<vector<int>> ans;
+        multiset<int> heights{0};
+        vector< pair <int,int> > pairs;
+        for(auto b: buildings){
+            pairs.push_back({b[0], -b[2]});
+            pairs.push_back({b[1], b[2]});
+        }
+        sort(pairs.begin(),pairs.end());
+        int ongoingHeight=0;
+        vector< pair<int,int> >::iterator itr;
+        for(itr=pairs.begin();itr!=pairs.end();itr++){
+            if(itr->second<0){
+                heights.insert(-itr->second);
+            }else{
+                heights.erase(heights.find(itr->second));
+            }
+            int top = *heights.rbegin();
+            if(ongoingHeight!= top){
+                ongoingHeight = top;
+                ans.push_back({itr->first,ongoingHeight});
+            }
+        }
+        return ans;
+    }
+};
