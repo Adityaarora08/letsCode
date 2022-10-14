@@ -1,0 +1,7 @@
+used to create own terms for iteration 
+
+vector<vector<int>> a = {{,},{,}.....};  //any vector of pairs of numbers
+//sort by the end terms of these vectors in the main vector
+sort(a.begin(),a.end(),[&](vector<int> &a,vector<int> &b){
+return a[1]<b[1];
+});
