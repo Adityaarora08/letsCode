@@ -1,0 +1,76 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    // int formDigit(ListNode* head,int count){
+    //     if(head==NULL){
+    //         return 0;
+    //     }
+    //     int val=head->val*pow(10,count);
+    //     return val+formDigit(head->next,count+1);
+    // }
+    // ListNode* formList(int num){
+    //     if(num==0) return NULL;
+    //     int val=num%10;
+    //     ListNode* head= new ListNode(val);
+    //     head->next = formList(num/10);
+    //     return head;
+    // }
+    ListNode* addLists(ListNode* l1,ListNode* l2,int carry){
+        if(l1==NULL && l2 == NULL && carry==0){
+            return NULL;
+        }
+        int a=0,b=0;
+        if(l1!=NULL){
+            a= l1->val;
+        }
+        if(l2!=NULL){
+            b= l2->val;
+        }
+        int num=a+b+carry;
+        carry=0;
+        if(num>9){
+            carry++;
+            num=num%10;
+        }
+        ListNode* head = new ListNode(num);
+        if(l1!=NULL && l2!=NULL){
+            head->next= addLists(l1->next,l2->next,carry);
+        }
+        else if(l1==NULL && l2!=NULL){
+            head->next= addLists(l1,l2->next,carry);
+        }else if(l1!=NULL && l2==NULL){
+            head->next= addLists(l1->next,l2,carry);
+        }
+        // if(carry){
+        //     head->next = new ListNode(carry);
+        //     head->next->next=NULL;
+        // }
+        return head;
+    }
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        // int digit1=formDigit(l1,0);
+        // int digit2=formDigit(l2,0);
+        // int digit3=digit1+digit2;
+        // cout<<digit3;
+        // int temp=digit3,count=0;
+        // if(digit1.second>digit2.second){
+        //     count=digit1.second;
+        // }else{
+        //     count=digit2.second;
+        // }
+        // if(digit3==0){
+        //     ListNode* head= new ListNode(0);
+        //     return head;
+        // }
+        return addLists(l1,l2,0);
+    }
+};
