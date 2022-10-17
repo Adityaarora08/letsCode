@@ -1,0 +1,58 @@
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        int carry=0;
+        int i=num1.length()-1;
+        int j=num2.length()-1;
+        string ans="";
+        int a=0;
+        while(i>=0 || j>=0 || carry){
+            int a1=0,a2=0;
+            if(i>=0){
+                a1=(num1[i]-'0');
+            }
+            if(j>=0){
+               a2= (num2[j]-'0');
+            }
+            a= a1+a2+carry;
+            carry=0;
+            if(a>9){
+             carry++;
+                a=a%10;
+            }
+            ans =char(a+'0')+ans;
+            --i;
+            --j;
+        }
+        // if(i>=0){
+        //     // i++;
+        //     while(i>=0){
+        //     a=int(num1[i])+ carry;
+        //     carry=0;
+        //     if(a>9){
+        //      carry++;
+        //         a=a%10;
+        //     }
+        //     ans= char(a+'0')+ans;
+        //     i--;
+        // }
+        // }
+        // else if(j>=0){
+        //     // j++;
+        //     while(j>=0){
+        //     a=int(num2[j])+ carry;
+        //     carry=0;
+        //     if(a>9){
+        //      carry++;
+        //         a=a%10;
+        //     }
+        //     ans= char(a+'0')+ans;
+        //     j--;
+        // }
+        // }
+        // if(carry!=0){
+        //     ans= char(carry+'0')+ans;
+        // }
+        return ans;
+    }
+};
