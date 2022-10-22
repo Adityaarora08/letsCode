@@ -1,0 +1,61 @@
+class Solution {
+public:
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string,int> mp;
+        for(int i=0;i<words.size();i++){
+            mp[words[i]]++;
+        }
+        vector<pair<int,string>> pr;
+        for(auto i:mp){
+            pr.push_back(make_pair(i.second,i.first));
+        }
+        sort(pr.rbegin(),pr.rend());
+        vector<string> ans;
+        int max=0;
+        // for(int i=0;i<pr.size();i++){
+        //     string str=pr[i].second;
+        //     int k=i+1;
+        //     int j=0;
+        //     max=pr[i].first;
+        //     while(k<pr.size()){
+        //         if(str>pr[k].second && max==pr[k].first){
+        //             str=pr[k].second;
+        //             j=k;
+        //         }
+        //         k++;
+        //     }
+        //     ans.push_back(str);
+        //     if(j>i){
+        //         i--;
+        //     }
+        // }
+         for (int i = 0; i < pr.size() - 1; i++)
+        {
+            int j = i;
+            while (j < pr.size() - 1 && pr[j].first == pr[j+1].first)
+            {
+                if (pr[j+1].second < pr[i].second)
+                {
+                    swap(pr[j+1].second, pr[i].second);
+                }
+                j++;
+            }
+        }
+        // for(int i=0;i<pr.size() - 1;i++){
+        //     int k=i;
+        //         while(k<pr.size()-1 && pr[k+1].first==pr[i].first){
+        //             if(pr[k+1].second < pr[i].second){
+        //             string temp = pr[k+1].second;
+        //             pr[k+1].second=pr[i].second;
+        //             pr[i].second=temp;
+        //             }
+        //             k++;
+        //         }
+        // }
+        vector<string> finalans;
+        for(int i=0;i<k;i++){
+            finalans.push_back(pr[i].second);
+        }
+        return finalans;
+    }
+};
