@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n= nums.size();
+        if(n<=1){
+            return nums;
+        }
+        int num=0,repeatedNum=0;
+        for(int i=1;i<n;i++){
+            if(nums[i]==nums[i-1]){
+                repeatedNum=nums[i];
+                while(i<n-1){
+                    nums[i]=nums[i+1];
+                    i++;
+                }
+                nums[n-1]=-1;
+                break;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(nums[i]!=i+1){
+                num=i+1;
+                break;
+            }
+        }
+        vector<int> ans;
+        ans.push_back(repeatedNum);
+        ans.push_back(num);
+        return ans;
+    }
+};
