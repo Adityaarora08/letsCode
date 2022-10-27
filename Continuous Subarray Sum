@@ -1,0 +1,53 @@
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+//         int prefSum = 0;
+  
+//   unordered_map<int, int> mp;
+//   for(int i=0; i<nums.size(); i++)
+//   {
+//     prefSum += nums[i];
+//     prefSum %= k;
+
+//     if(prefSum == 0 && i) return true;
+
+//     if(mp.find(prefSum) != mp.end())  // Found the required prefix sum 
+//     {
+//       if(i - mp[prefSum] > 1) return true; // check if atleast 2 elements are there or not
+//     }
+//     else mp[prefSum] = i;
+//   }
+
+//   return false; 
+        int sum=0;
+        unordered_map<int,int> mp;
+        for(int i=0;i<nums.size();i++){
+            sum=(sum+nums[i])%k;
+            if(sum==0 && i>0){
+                return true;
+            }
+            if(mp.find(sum) !=mp.end() ){
+                int a=mp[sum];
+                if(i-a>1) return true;
+            }else{
+                mp[sum]=i;
+            }
+        }
+        return false;
+        
+        
+        
+        
+        
+        // for(int i=0;i<nums.size();i++){
+        //     int sum=nums[i];
+        //     for(int j=i+1;j<nums.size();j++){
+        //         sum+=nums[j];
+        //         if(sum%k==0){
+        //             return true;
+        //         }
+        //     }
+        // }
+        // return false;
+    }
+};
