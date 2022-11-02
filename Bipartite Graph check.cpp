@@ -1,90 +1,135 @@
 // C++ program to check if a connected
-// graph is bipartite or not using DFS
-#include <bits/stdc++.h>
-using namespace std;
+// graph is bipartite or not using BFS
 
-// function to store the connected nodes
-void addEdge(vector<int> adj[], int u, int v)
-{
-	adj[u].push_back(v);
-	adj[v].push_back(u);
-}
-
-// function to check whether a graph is bipartite or not
-bool isBipartite(vector<int> adj[], int v,
-				vector<bool>& visited, vector<int>& color)
-{
-
-	for (int u : adj[v]) {
-
-		// if vertex u is not explored before
-		if (visited[u] == false) {
-
-			// mark present vertices as visited
-			visited[u] = true;
-
-			// mark its color opposite to its parent
-			color[u] = !color[v];
-
-			// if the subtree rooted at vertex v is not bipartite
-			if (!isBipartite(adj, u, visited, color))
-				return false;
-		}
-
-		// if two adjacent are colored with same color then
-		// the graph is not bipartite
-		else if (color[u] == color[v])
-			return false;
-	}
-	return true;
-}
-
-// Driver Code
-int main()
-{
-	// no of nodes
-	int N = 6;
-
-	// to maintain the adjacency list of graph
-	vector<int> adj[N + 1];
-
-	// to keep a check on whether
-	// a node is discovered or not
-	vector<bool> visited(N + 1);
-
-	// to color the vertices
-	// of graph with 2 color
-	vector<int> color(N + 1);
-
-	// adding edges to the graph
-	addEdge(adj, 1, 2);
-	addEdge(adj, 2, 3);
-	addEdge(adj, 3, 4);
-	addEdge(adj, 4, 5);
-	addEdge(adj, 5, 6);
-	addEdge(adj, 6, 1);
-
-	// marking the source node as visited
-	visited[1] = true;
-
-	// marking the source node with a color
-	color[1] = 0;
-
-	// Function to check if the graph
-	// is Bipartite or not
-	if (isBipartite(adj, 1, visited, color)) {
-		cout << "Graph is Bipartite";
-	}
-	else {
-		cout << "Graph is not Bipartite";
-	}
-
-	return 0;
-}
-
-
-
-
+class Solution {
+public:
+    // bool colorNode(int src,int parent,vector<vector<int>>& graph,vector<bool> &vis,vector<int> &colors){
+    //     if(!vis[src]){
+    //         vis[src]=true;
+    //         if(colors[parent]== 1){
+    //             colors[src]= 2;
+    //         }else if(colors[parent]== 2){
+    //             colors[src]= 1;
+    //         }
+    //     }
+    //     if(colors[parent]==colors[src]){
+    //             return false;
+    //         }
+    //     return true;
+    // }
+    // bool bipartite(vector<vector<int> >& graph,vector<int>& colors,vector<bool>& vis,int v){
+    //     for(int i=0;i<graph[v].size();i++){
+    //         if(!vis[graph[v][i]]){
+    //             vis[graph[v][i]]=true;
+    //             colors[graph[v][i]]= !colors[v];
+    //             if(!bipartite(graph,colors,vis,graph[v][i])){
+    //                 return false;
+    //             }
+    //         }else if(colors[graph[v][i]]==colors[v]){
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+    bool isBipartite(vector<vector<int>>& graph) {
+        // vector<bool> vis(graph.size(),0);
+//         int n = graph.size();
+//         vector<int> colors(n, 0);
+//         queue<int> q;
+        
+//         for (int i = 0; i < n; i++) {
+//             if (colors[i]) continue;
+            
+//             colors[i] = 1;
+//             q.push(i);
+            
+//             while (!q.empty()) {
+//                 int temp = q.front();
+                
+//                 for (auto neighbor : graph[temp]) {
+                    
+// 					// Color neighbor with opposite color
+//                     if (!colors[neighbor]){
+//                         colors[neighbor] = -colors[temp];
+//                         q.push(neighbor);
+//                     }
+                    
+// 					// If the neighbor has the same color - can't bipartite.
+//                     else if (colors[neighbor] == colors[temp]) 
+//                         return false;
+//                 }
+//                 q.pop();
+//             }
+//         }
+//         return true;
+        
+        vector<int> colors(graph.size(),0);
+        queue<int> q;
+        for(int i=0;i<graph.size();i++){
+            if(colors[i])continue;
+            colors[i]=1;
+            q.push(i);
+            while(!q.empty()){
+                int temp = q.front();
+                for(int it : graph[temp]){
+                    if(!colors[it]){
+                        q.push(it);
+                        colors[it]=-colors[temp];
+                    }else if(colors[it]==colors[temp]){
+                        return false;
+                    }
+                }
+                q.pop();
+            }
+        }
+        return true;
+        
+        
+        
+        
+        
+        
+        
+        
+	// vis[0]=1;
+	// colors.push_back(0);
+	// if (bipartite(graph,colors,vis,0)) {
+	// 	return true;
+	// }
+	// else {
+	// 	return false;
+	// }
+        // for(int i=0;i<graph.size();i++){
+        //     if(!vis[i]){
+        //         for(int j=0;j<graph[i].size();j++){
+        //             if(vis[graph[i][j]]){
+        //                 if(colors[graph[i][j]]== 1){
+        //                     colors[i]= 2;
+        //                 }else if(colors[graph[i][j]]== 2){
+        //                     colors[i]= 1;
+        //                 }
+        //             }
+        //         }
+        //         if(colors[i]==0){
+        //             colors[i]=1;
+        //         }
+        //         vis[i]=true;
+        //         for(int j=0;j<graph[i].size();j++){
+        //             if(colorNode(graph[i][j],i,graph,vis,colors)==false){
+        //                 return false;
+        //             }
+        //         }
+        //     }else{
+        //         for(int j=0;j<graph[i].size();j++){
+        //             if(colorNode(graph[i][j],i,graph,vis,colors)==false){
+        //                 return false;
+        //             }
+        //         }
+        //     }
+        // }
+        // return true;
+    }
+};
 
 
 
