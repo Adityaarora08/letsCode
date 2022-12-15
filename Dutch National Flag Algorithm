@@ -1,0 +1,29 @@
+//for sort colors problem
+//take three pointers for all the three colors and swap
+
+class Solution {
+public:
+void swap(vector<int>& nums,int i,int j){
+    int temp=nums[i];
+    nums[i]=nums[j];
+    nums[j]=temp;
+}
+    void sortColors(vector<int>& nums) {
+        int l=0,m=0,h=nums.size()-1;
+        while(m<=h){
+            if(nums[m]==0){
+                swap(nums,l,m);
+                m++;
+                l++;
+            }
+            else if(nums[m]==2){
+                swap(nums,m,h);
+                // m++;
+                h--;
+            }
+            else{
+                m++;
+            }
+        }
+    }
+};
