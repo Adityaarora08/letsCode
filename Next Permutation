@@ -1,0 +1,42 @@
+//can also use c++ inbuilt function next_permutation directly
+//find element whose previous element is greater i.e. nums[i]<nums[i+1]
+// find the first element from back that is greater than this ith element
+//swap the two elements
+//reverse the rest of array after ith element
+class Solution {
+public:
+    vector<int> reverse(vector<int> nums,int start,int end) {
+        vector<int> ans;
+        // if(start>=end)return nums;
+        for(int i=0;i<start;i++){
+            ans.push_back(nums[i]);
+        }
+        for(int i=end;i>=start;i--){
+            ans.push_back(nums[i]);
+        }
+        return ans;
+    }
+    void nextPermutation(vector<int>& nums) {
+        int n=nums.size();
+        int i=0;
+        for(i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                break;
+            }
+        }
+        if(i<0){
+            nums=reverse(nums,0,n-1);
+        }
+        else{
+            int k=0;
+            for(k=n-1;k>i;k--){
+                if(nums[k]>nums[i])break;
+            }
+            int temp=nums[k];
+            nums[k]=nums[i];
+            nums[i]=temp;
+            nums=reverse(nums,i+1,n-1);
+        }
+        
+    }
+};
