@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+    //using that rabbit tortoise algorithm
+        int slow=nums[0],fast=nums[0];
+        do{
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+        }
+        while(slow!=fast);
+        fast=nums[0];
+        while(slow!=fast){
+            slow=nums[slow];
+            fast=nums[fast];
+        }
+        return slow;
+        // vector<bool> vis(nums.size(),false);
+        // int i;
+        // for(i=0;i<nums.size();++i){
+        //     if(vis[nums[i]]!=true){
+        //         vis[nums[i]]=true;
+        //     }else{
+        //         break;
+        //     }
+        // }
+        // return nums[i];
+    }
+};
