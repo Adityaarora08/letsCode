@@ -1,0 +1,32 @@
+class Solution {
+public:
+    double myPow(double x, int n) {
+        // if(n==1){
+        //     return x;
+        // }
+        // if(n<0)
+        // return myPow(1/(x*x),n);
+        // return myPow(x*x,n-1);
+        // for(int i=0;i<n;)
+        bool neg=false;
+        long long nn=n;
+        if(n<0){
+            nn*=-1;
+            neg=true;
+        }
+        double ans=1;
+        while(nn>0){
+            if(nn%2==0){
+                x=x*x;
+                nn/=2;
+            }else{
+                ans=ans*x;
+                nn--;
+            }
+        }
+        if(neg){
+            ans=1/ans;
+        }
+        return ans;
+    }
+};
