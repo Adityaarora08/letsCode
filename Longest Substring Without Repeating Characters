@@ -1,6 +1,52 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int newCount=0;
+        // set<char> st;
+        vector<int> mp(256,-1);
+        int l=0,r=0;
+        while(r<s.length()){
+            if(mp[s[r]]!=-1){
+                l= max(mp[s[r]]+1,l);
+            }
+            mp[s[r]]=r;
+            newCount=max(newCount,(r-l+1));
+            r++;
+        }
+        // while(l<=r && r<s.length()){
+        //     if(st.find(s[r])!=st.end()){
+        //         while(s[l]!=s[r]){
+        //             st.erase(s[l]);
+        //             l++;
+        //         }
+        //         l++;
+        //         st.erase(s[r]);
+        //     }
+        //         newCount=max(newCount,r-l+1);
+        //         st.insert(s[r]);
+            
+        //     r++;
+        // }
+        // for(int i=0;i<s.length();i++){
+
+            // map<char,int> mp;
+            // int count=0;
+            // int j=i;
+            // while(mp[s[j]]==0){
+            //     mp[s[j]]=1;
+            //     count++;
+            //     j++;
+            // }
+            // newCount=max(newCount,count);
+        // }
+        return newCount;
+    }
+};
+
+//old solution
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
         vector<int> vect(256,-1);
         int left=0,right=0;
         int len=0;
