@@ -1,0 +1,23 @@
+//an also apply binary search
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int l=0,h=nums.size()-1;
+        while(l<=h){
+            if(nums[l]==target && nums[h]==target){
+                break;
+            }else if(nums[l]==target){
+                h--;
+            }else if(nums[h]==target){
+                l++;
+            }else{
+                h--;
+                l++;
+            }
+        }
+        if(l>h){
+            return {-1,-1};
+        }
+        return {l,h};
+    }
+};
