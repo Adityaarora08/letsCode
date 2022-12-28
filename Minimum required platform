@@ -1,0 +1,38 @@
+// bool comparator(pair<int,int> p1,pair<int,int> p2){
+//     return p1.second<p2.second;
+// }
+int calculateMinPatforms(int at[], int dt[], int n) {
+    sort(at,at+n);
+    sort(dt,dt+n);
+    int maxi=0,p=0,j=0;
+    for(int i=0;i<n;i++){
+        while(j<n && at[i]>dt[j]){
+            p--;
+            j++;
+        }
+        if(dt[j]>=at[i]){
+            p++;
+            maxi=max(p,maxi);
+        }
+    }
+    return maxi;
+//     vector<pair<int,int>> trains;
+//     for(int i=0;i<n;i++){
+//         trains.push_back(make_pair(at[i],dt[i]));
+//     }
+//     sort(trains.begin(),trains.end(),comparator);
+//     int limit=trains[0].second;
+//     int count=1;
+//     priority_queue< int,vector<int>,greater<int> > q;
+    
+//     for(int i=0;i<n;i++){
+//         while(q.top()<trains[i].first){
+//             if(count<q.size()){
+//                 count=q.size();
+//             }
+//             q.pop();
+//         }
+//             q.push(trains[i].second);
+//     }
+//     return count;
+}
