@@ -1,0 +1,67 @@
+#include <bits/stdc++.h> 
+bool comparator(vector<int> v1,vector<int> v2){
+    if(v1[1]>v2[1]){
+        return true;
+    }
+    else
+    return false;
+}
+int jobScheduling(vector<vector<int>> &jobs)
+{
+    int n=jobs.size();
+    sort(jobs.begin(),jobs.end(),comparator);
+    int sum=0;
+    int maxi=jobs[0][0];
+    for(int i=1;i<n;i++){
+        maxi=max(maxi,jobs[i][0]);
+    }
+    int slot[maxi];
+    for(int i=0;i<maxi;i++)
+        slot[i]=-1;
+    for(int i=0;i<n;i++){
+        int curr=jobs[i][0];
+        int profit=jobs[i][1];
+//         if(slot[curr-1]==-1){
+//             sum+=profit;
+//             slot[curr-1]=1;
+//         }else{
+            while(curr>0){
+                if(slot[curr-1]==-1){
+                   sum+=profit;
+                   slot[curr-1]=curr;
+                    break;
+                }
+                curr--;
+            }
+//         }
+    }
+//     int i=0,count=1;
+//     while(i<n){
+//         int curr=jobs[i][0];
+//         int maxi=jobs[i][1];
+//         if(count==jobs[i][0]){
+//         int j=i;
+//         while(j<n && jobs[j][0]==curr ){
+//             maxi=max(maxi,jobs[i][0]);
+//             j++;
+//         }
+//          if(count==curr){
+//              i=j;
+//          }
+//         if(count<=curr){
+//          sum+=maxi;
+//          count++;
+//         }
+        
+//         }else{
+//             sum+=maxi;
+//         }
+//         if(curr>i){
+            
+//         }
+//         cout<<jobs[i][0]<<" "<<jobs[i][1]<<endl;
+//         count++;
+//         i++;
+//     }
+    return sum;
+}
