@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+struct activities{
+    public:
+    int arrival,depart,index;
+};
+bool comparator(struct activities m1, activities m2) 
+{ 
+    if (m1.depart < m2.depart) return true; 
+    else if(m1.depart > m2.depart) return false; 
+    else if(m1.index < m2.index) return true; 
+    return false; 
+}
+int maximumActivities(vector<int> &start, vector<int> &finish) {
+    int n=start.size();
+    struct activities ac[n];
+    for(int i=0;i<n;i++){
+        ac[i].arrival=start[i];
+        ac[i].depart=finish[i];
+        ac[i].index = i;
+    }
+    sort(ac,ac+n,comparator);
+    int count=1,limit=ac[0].depart;
+    for(int i=1;i<n;i++){
+        if(ac[i].arrival >= limit){
+            limit=ac[i].depart;
+            count++;
+        }
+    }
+    return count;
+    
+}
