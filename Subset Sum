@@ -1,0 +1,17 @@
+#include <bits/stdc++.h> 
+void subset(vector<int> &num,int index,int N,int sum,vector<int> & ans){
+    if(index==N){
+        ans.push_back(sum);
+        return;
+    }
+    subset(num,index+1,N,sum+num[index],ans);
+    subset(num,index+1,N,sum,ans);
+}
+vector<int> subsetSum(vector<int> &num)
+{
+    vector<int> ans;
+    subset(num,0,num.size(),0,ans);
+    sort(ans.begin(),ans.end());
+    return ans;
+    // Write your code here.
+}
