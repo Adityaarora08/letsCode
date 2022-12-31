@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+void insert(int num,stack<int> &st){
+    if(st.empty() || st.top()<=num){
+        st.push(num);
+        return;
+    }
+    int temp=st.top();
+    st.pop();
+    insert(num,st);
+    st.push(temp);
+}
+void sortst(stack<int> &st){
+    if(st.size()==1){
+        return;
+    }
+    int temp=st.top();
+    st.pop();
+    sortst(st);
+    insert(temp,st);
+}
+int main()
+{
+    stack<int> st;
+    st.push(1);
+    st.push(5);
+    st.push(2);
+    st.push(0);
+    sortst(st);
+    while(!st.empty()){
+        cout<<st.top()<<" ";
+        st.pop();
+    }
+    return 0;
+}
