@@ -1,0 +1,90 @@
+class Solution {
+public:
+    // bool isPossible(vector<string> queens,int i,int j,int n,vector<int> &rows,vector<bool> &col){
+    //     int a=0;
+    //     while(a<n){
+    //         if(queens[i][a]=='Q'){
+    //             return false;
+    //         }
+    //         a++;
+    //     }
+    //     a=0;
+    //     while(a<n){
+    //         if(queens[a][j]=='Q'){
+    //             return false;
+    //         }
+    //         a++;
+    //     }
+    //     int row=i,col=j;
+    //     while(col>=0 && row>=0){
+    //         if(queens[row][col]=='Q'){
+    //             return false;
+    //         }
+    //         row--;
+    //         col--;
+    //     }
+    //     row=i,col=j;
+    //     while(col<n && row<n){
+    //         if(queens[row][col]=='Q'){
+    //             return false;
+    //         }
+    //         row++;
+    //         col++;
+    //     }
+    //     row=i,col=j;
+    //     while(col>=0 && row<n){
+    //         if(queens[row][col]=='Q'){
+    //             return false;
+    //         }
+    //         row++;
+    //         col--;
+    //     }
+    //     row=i,col=j;
+    //     while(col<n && row>=0){
+    //         if(queens[row][col]=='Q'){
+    //             return false;
+    //         }
+    //         row--;
+    //         col++;
+    //     }
+    //     return true;
+    // }
+    void queens(int n,vector<vector<string>> &ans,vector<string> &ds,int col
+,vector<int> &leftRow,vector<int> &upperDiagonal,vector<int> &lowerDiagonal){
+        if(col==n){
+            ans.push_back(ds);
+            return;
+        }
+        for(int i=0;i<n;i++){
+            if(leftRow[i]==0 && upperDiagonal[n-1+col-i]==0 && lowerDiagonal[i+col]==0){
+                leftRow[i]=1;
+                upperDiagonal[n-1+col-i]=1;
+                lowerDiagonal[i+col]=1;
+                ds[i][col]='Q';
+                queens(n,ans,ds,col+1,leftRow,upperDiagonal,lowerDiagonal);
+                leftRow[i]=0;
+                upperDiagonal[n-1+col-i]=0;
+                lowerDiagonal[i+col]=0;
+                ds[i][col]='.';
+                
+            }
+            // if(isPossible(ds,i,col,n)){
+            //     ds[i][col]='Q';
+            //     queens(n,ans,ds,col+1);
+            //     ds[i][col]='.';
+            // }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        vector<string> ds;
+        string ab(n,'.');
+        for(int i=0;i<n;i++){
+            ds.push_back(ab);
+        }
+        vector<int> leftRow(n,0);
+        vector<int> upperDiagonal(2*n-1,0),lowerDiagonal(2*n-1,0);
+        queens(n,ans,ds,0,leftRow,upperDiagonal,lowerDiagonal);
+        return ans;
+    }
+};
