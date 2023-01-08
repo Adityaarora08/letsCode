@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+	int n;
+	cin>>n;
+	vector<int> arrival(n),depart(n);
+	for(int i=0;i<n;i++)
+	      cin>>arrival[i];
+    for (int i = 0; i < n; i++)
+          cin >> depart[i];
+     sort(depart.begin(),depart.end());
+     sort(arrival.begin(), arrival.end());
+    //  stack<int> st;
+	int count=1,result=1;
+	     int j=0;
+         int i = 1;
+         while (i < n && j < n) {
+           if (arrival[i] <= depart[j]) {
+             count++;
+			 result=max(result,count);
+             i++;
+           } else {
+             j++;
+			 count--;
+           }
+	 }
+	 cout<<result<<endl;
+}
