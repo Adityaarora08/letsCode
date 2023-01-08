@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool comparator(pair<int, int> s1, pair<int, int> s2) {
+	if(s1.first>s2.first){
+		return true;
+        } else if (s1.first < s2.first){
+			return false;
+		}else{
+			if(s1.second<s2.second){
+				return true;
+			}else{
+				return false;
+			}
+		}
+}
+
+
+int main() {
+  int n;
+  cin >> n;
+  vector<string> names(n);
+  vector<pair<int, int>> marks(n);
+  for (int i = 0; i < n; i++) {
+    int m1, m2, m3;
+    cin >> names[i] >> m1 >> m2 >> m3;
+    marks[i] = make_pair(m1 + m2 + m3, i);
+  }
+  sort(marks.begin(), marks.end(), comparator);
+  for(int i=0;i<n;i++){
+	  cout<<i+1<<" "<<names[marks[i].second]<<endl;
+  }
+  return 0;
+}
