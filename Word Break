@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void breaker(unordered_set<string> st,string s,
+            vector<string> &ans,string ds,int index,int n){
+    if(index>=n){
+        ans.push_back(ds);
+        return;
+    }
+    string word="";
+    for(int i=index;i<n;i++){
+        word+=s[i];
+        if(st.find(word)!=st.end()){
+            ds=ds+word;
+           if(i!=n-1) ds=ds+" ";
+            breaker(st,s,ans,ds,i+1,n);
+            int l=ds.length();
+            if(i!=n-1)ds.erase(l-word.length()-1,word.length()+1);
+            else{
+                ds.erase(l-word.length(),word.length()+1);
+            }
+        }
+    }
+}
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+    vector<string> ans;
+    string ds;
+    unordered_set<string> st;
+    for(int i=0;i<wordDict.size();i++){
+        st.insert(wordDict[i]);
+    }
+    int n=s.length();
+    breaker(st,s,ans,ds,0,n);
+    return ans;
+    }
+};
