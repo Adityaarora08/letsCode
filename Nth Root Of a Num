@@ -1,0 +1,41 @@
+#include <bits/stdc++.h> 
+double multiply(double num,int pow){
+    double ans=1.0;
+    for(int i=0;i<pow;i++){
+        ans*=num;
+    }
+    return ans;
+}
+double findNthRootOfM(int n, int m) {
+//      double low = 0;
+//     double high = m;
+//     double mid;
+//     double ep = 1e-7;
+//     while((high - low) > ep){
+//         mid = (high+low)/2.0;
+//         if(pow(mid,n) == m){
+//             return mid;
+//         }
+//         if(pow(mid,n) > m){
+//             high = mid;
+//         }
+//         else{
+//             low = mid;
+//         }
+//     }
+//     // you can also return high value, it will give the same result
+//     return low;
+    double mini=0,maxi=m;
+    double eps=1e-7;
+    while((maxi-mini)>eps){
+        double mid=(mini+maxi)/2.0;
+        double num=multiply(mid,n);
+        if(num==m)return mid;
+        if(num<m){
+            mini=mid;
+        }else{
+            maxi=mid;
+        }
+    }
+    return mini;
+}
