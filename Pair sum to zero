@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+int pairSum(int *arr, int n) {
+//   unordered_set < vector<int> > st1;
+  unordered_map<int,int> st;
+  int count = 0, zeroCount=0;
+  for(int i=0;i<n;i++){
+  	st[arr[i]]++;
+  }
+  for(int i=0;i<n;i++){
+	  if(arr[i]==0){
+		  zeroCount++;
+          continue;
+          }
+  	int a=(-1)*arr[i];
+  	if(st[a]>=1){
+  		  count+=st[a];
+  	}
+  }
+  zeroCount = zeroCount*(zeroCount - 1) /
+              2;
+			  count/=2;
+                          count += zeroCount;
+                                   //   for(int i=0;i<n;i++){
+                                   // 	  for(int j=0;j<n;j++){
+                                   // 		  if(i==j)continue;
+
+                                   // 	  }
+                                   //   }
+                                   return count ;
+}
