@@ -1,0 +1,29 @@
+int countLessthanEqual(vector<int> arr,int num,int n){
+    int l=0,h=n-1;
+    while(l<=h){
+        int mid= (l+h) >> 1;
+        if(arr[mid]<=num){
+            l=mid+1;
+        }else{
+            h=mid-1;
+        }
+    }
+    return l;
+}
+int Solution::findMedian(vector<vector<int> > &A) {
+     int l=1,h=1e9;
+     int n1=A.size(),n2=A[0].size();
+    while(l<=h){
+        int mid=(l+h)/2;
+        int cnt=0;
+        for(int i=0;i<n1;i++){
+            cnt+=countLessthanEqual(A[i],mid,n2);
+        }
+        if(cnt<=(n1*n2)/2){
+            l=mid+1;
+        }else{
+            h=mid-1;
+        }
+    }
+    return l;
+}
