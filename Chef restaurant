@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define read(type) readInt<type>() // Fast read
+#define ll long long
+#define nL "\n"
+#define pb push_back
+#define mk make_pair
+#define pii pair<int, int>
+#define a first
+#define b second
+#define vi vector<int>
+#define all(x) (x).begin(), (x).end()
+#define umap unordered_map
+#define uset unordered_set
+#define MOD 1000000007
+#define imax INT_MAX
+#define imin INT_MIN
+#define exp 1e9
+#define sz(x) (int((x).size()))
+int main()
+{
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(NULL);
+    int ttt; cin >> ttt;
+    while(ttt--) {
+        int n,m;
+        cin>>n>>m;
+        vector<pair<int,int>> times(n);
+        for(int i=0;i<n;i++){
+            
+            cin>>times[i].first>>times[i].second;
+        }
+        vector<int> nums(m);
+        for(int i=0;i<m;i++){
+            cin>>nums[i];
+        }
+        sort(times.begin(),times.end());
+       for(int i=0;i<m;i++){
+            int pos=lower_bound(times.begin(),times.end(),make_pair(nums[i],0))-times.begin();
+            if(pos==0){
+                int ans=times[0].first-nums[i];
+                cout<<ans<<endl;
+            }else {
+                if(times[pos-1].second>nums[i]){
+                    cout<<0<<endl;
+                }else if(pos<times.size()){
+                    cout<<times[pos].first-nums[i]<<endl;
+                }else{
+                    cout<<-1<<endl;
+                }
+            }
+       }
+    }
+    return 0;
+}
