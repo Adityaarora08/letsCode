@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+int ninjaAndLadoos(vector<int> &nums1, vector<int> &nums2, int m, int n, int k) {
+    int n1=m,n2=n;
+        if(n2<n1){
+            return ninjaAndLadoos(nums2,nums1,n,m,k);
+        }
+        int l=max(0,k-n2),h=min(n1,k);
+        while(l<=h){
+            int cut1=(l+h)>>1;
+            int cut2=k-cut1;
+            int left1 = cut1==0?INT_MIN : nums1[cut1-1],
+            right1=cut1==n1?INT_MAX : nums1[cut1];
+            int left2 = cut2==0?INT_MIN : nums2[cut2-1],
+            right2=cut2==n2?INT_MAX : nums2[cut2];
+            if(left1<=right2 && left2<=right1){
+                    return max(left1,left2);
+            }
+            if(left1>right2){
+                h=cut1-1;
+            }else{
+                l=cut1+1;
+            }
+        }
+       return 1; 
+}
