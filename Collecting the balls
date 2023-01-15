@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool isPossible(long long k, long long num) {
+  long long n = num;
+  long long sum = 0;
+  while (n > 0) {
+    if (n < k) {
+      sum += n;
+      n = 0;
+    } else {
+      n -= k;
+      sum += k;
+      n -= n/10;
+    }
+  }
+  if(num%2==0){
+      if (sum < num / 2)
+           return false;    
+  }else{
+      if (sum < (num+1)/2) 
+        return false;
+  }
+  return true;
+}
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    long long n;
+    cin >> n;
+    long long l = 1, h = (n+1) / 2 ;
+    long long ans = 0;
+    while (l <= h) {
+      long long mid = (l + h) >> 1;
+      if (isPossible(mid, n)) {
+        ans = mid;
+        h = mid - 1;
+      } else {
+        l = mid + 1;
+      }
+    }
+    cout << ans << endl;
+  }
+  return 0;
+}
