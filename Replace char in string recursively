@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+void replace(char s,char r,char str[]){
+    if(str[0]=='\0')return;
+    if(str[0]!=s){
+        replace(s,r,str+1);
+    }else{
+        str[0]=r;
+        replace(s,r,str+1);
+    }
+}
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+      char str[100];
+      cin >> str;
+      char s,r;
+      cin>>s>>r;
+      replace(s, r, str);
+      cout<<str<<endl;
+    }
+    // write your code here
+    return 0;
+}
