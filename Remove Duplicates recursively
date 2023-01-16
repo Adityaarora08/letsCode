@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+void replace(char str[]) {
+  if (str[0] == '\0')
+    return;
+ if(str[1] != '\0' && str[0]==str[1]){
+    int x;
+   int i = 0;
+    for (i = 1; str[i] != '\0'; i++) {
+         str[i] = str[i +1];
+          }
+    str[i-1]=str[i];
+    replace(str);
+ }else{
+     replace(str+1);
+ }
+}
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+      char str[100000];
+    // string str;
+    cin >> str;
+    replace(str);
+    cout << str << endl;
+  }
+  return 0;
+}
