@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    long long n,x,y;
+    cin>>n>>x>>y;
+    vector<long long> arr(n);
+    for(long long i=0;i<n;i++)cin>>arr[i];
+    sort(arr.begin(),arr.end());
+    long long total=0;
+    long long ans = 1e15;
+    for(total=arr[0];total<=arr[n-1];total++){
+      long long totalInc = 0, totalDec = 0,currAns=1e15;
+      for (long long i = 0; i < n; i++) {
+        if (arr[i] < total) {
+          totalInc += total - arr[i];
+        } else if (arr[i] > total) {
+          totalDec += arr[i] - total;
+        }
+      }
+        if (totalDec <= totalInc) {
+          currAns = (totalDec * x) + ((totalInc - totalDec) * y);
+        }
+        ans=min(currAns,ans);
+      }
+      cout<<ans<<endl;
+    return 0;
+}
