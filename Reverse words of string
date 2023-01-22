@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans="";
+        // string s="";
+        int count=0,words=0;
+        for(int i=0;i<s.length();i++){
+            if(s[i]!=' '){
+                while(i<s.length() && s[i]!=' '){
+                    i++;
+                }
+                words++;
+            }else{
+                continue;
+            }
+        }
+        for(int i=s.length()-1;i>=0;i--){
+            if(i==0 && s[i]!=' '){
+                ans+=s.substr(i,count+1);
+                break;
+            }
+            if(s[i]==' '){
+                if(words==1){
+                    ans+=s.substr(i+1,count);
+                    count=0;
+                }
+                else if(i<s.length()-1 && s[i+1]!=' '){
+                    ans+=s.substr(i+1,count);
+                    ans+=" ";
+                    words--;
+                    count=0;
+                }
+            }else{
+                count++;
+            }
+        }
+        return ans;
+    }
+};
