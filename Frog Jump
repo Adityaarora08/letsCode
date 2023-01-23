@@ -1,0 +1,38 @@
+#include <bits/stdc++.h> 
+// void findEnergy(int n,int energy,vector<int> &heights,vector<int> &ans){
+//     if(n<0)return;
+//     if(n==0){
+//         ans.push_back(energy);
+//         return;
+//     }
+//     if(heights[n]>heights[n-1]){
+//         findEnergy(n-1,energy+(heights[n]-heights[n-1]),heights,ans);
+//     }else{
+//         findEnergy(n-1,energy+(heights[n-1]-heights[n]),heights,ans);
+//     }
+//     if(heights[n]>heights[n-2]){
+//         findEnergy(n-2,energy+(heights[n]-heights[n-2]),heights,ans);
+//     }else{
+//         findEnergy(n-2,energy+(heights[n-2]-heights[n]),heights,ans);
+//     }
+    
+// }
+int f(int n,vector<int> &heights,vector<int> &dp){
+    int r=INT_MAX;
+    if(n==0)return 0;
+    if(dp[n]!=-1)return dp[n];
+    int l=f(n-1,heights,dp)+ abs(heights[n]-heights[n-1]);
+    if(n>1)
+    r=f(n-2,heights,dp)+abs(heights[n]-heights[n-2]);
+    return dp[n]=min(l,r);
+}
+int frogJump(int n, vector<int> &heights)
+{
+    vector<int> dp(n+1,-1);
+    // vector<int> ans;
+    // findEnergy(n-1,0,heights,ans);
+    // sort(ans.begin(),ans.end());
+    // // Write your code here.
+    // return ans[0];
+    return f(n-1,heights,dp);
+}
