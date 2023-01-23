@@ -1,0 +1,39 @@
+class Solution {
+public:
+//Memoization Solution
+int money(int index,vector<int> &nums,vector<int>& dp){
+    if(index>=nums.size())return 0;
+    if(dp[index]!=-1)return dp[index];
+    int l=money(index+2,nums,dp)+nums[index];
+    int r=money(index+1,nums,dp);
+    return dp[index]=max(l,r);
+}
+//Tabulation Solution
+/*
+    int rob(vector<int>& nums) {
+        vector<int> dp(nums.size()+1,-1);
+        dp[0]=nums[0];
+        for(int i=1;i<nums.size();i++){
+            int l=nums[i];
+            if(i>1)l=nums[i]+dp[i-2];
+            int r=dp[i-1];
+            dp[i]=max(l,r);
+        }
+        return dp[nums.size()-1];
+        // return money(0,nums,dp);
+    }
+    */
+    //Space optimized Solution
+    int rob(vector<int> &nums){
+        int prev=nums[0];
+        int prev2=0;
+        for(int i=1;i<nums.size();i++){
+            int l=nums[i];
+            if(i>1)l+=prev2;
+            int r=prev;
+            prev2=prev;
+            prev=max(l,r);
+        }
+        return prev;
+    }
+};
