@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+void build(vector<int> &Z, string s, string p, int n, int m) {
+  string str = p + "&" + s;
+  int j = 0;
+  for (int i = 1; i < str.length(); i++) {
+    if (str[i] == str[j])
+      ;
+    int k = i;
+    while (str[j] == str[k]) {
+      k++;
+      j++;
+    }
+    Z[i] = k - i;
+    j = 0;
+  }
+  // int i=0,j=1;
+  // while(j<str.length() ){
+  //   if (str[i] == '&')i=0;
+  //   if(str[i]==str[j]){
+  //      while()
+  //   }
+  // }
+}
+int main(){
+    int N,M,k;cin>>N>>M>>k;
+    string ioi,shivali;cin>>ioi>>shivali;
+    int j = 0;
+    string p = "";
+    while (j <  k) {
+      p += shivali[j];
+      j++;
+    }
+    string str=p+"$"+ioi;
+   vector<int> Z(str.length(),0);
+  j = 0;
+  int count = 0;
+  for (int i = 1; i < str.length(); i++) {
+    if (str[i] == str[j])
+      ;
+    int k = i;
+    while (str[j] == str[k]) {
+      k++;
+      j++;
+    }
+    Z[i] = k - i;
+    j = 0;
+  }
+  for (int i = 0; i < Z.size(); i++){
+    if (Z[i] >= k) {
+      count++;
+    }
+}
+if(count==0)cout<<-1<<endl;
+else cout << count<<endl;
+    return 0;
+}
