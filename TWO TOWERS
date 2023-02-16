@@ -1,0 +1,69 @@
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t;cin>>t;
+    while(t--){
+        int n,m;cin>>n>>m;
+        string s1,s2;cin>>s1>>s2;
+        bool flag=false,flag2=false,mainn=true;
+        for(int i=0;i<n-1;i++){
+            if(s1[i]==s1[i+1] && flag){
+                mainn=false;
+            }
+            if(s1[i]==s1[i+1] && !flag){
+                flag=true;
+            }
+            
+        }
+        for(int i=0;i<m-1;i++){
+            if(s2[i]==s2[i+1] && flag2){
+                mainn=false;
+            }
+            if(s2[i]==s2[i+1]){
+                flag2=true;
+            }
+        }
+        if(flag && flag2){
+            mainn=false;
+        }else{
+            if(s1[n-1]==s2[m-1]){
+                if(flag || flag2){
+                    mainn=false;
+                }
+            }
+        }
+        if(mainn){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
+        // int i=0,j=m-1;
+        // while(i<j){
+        //     char temp=s2[i];
+        //     s2[i]=s2[j];
+        //     s2[j]=temp;
+        //     i++;j--;
+        // }
+        // s1=s1+s2;
+        // bool flag=false,flag2=false;
+        // for(int i=0;i<s1.length()-1;i++){
+        //     if(s1[i]==s1[i+1]){
+        //         if(flag){
+        //             cout<<"NO"<<endl;
+        //             flag2=true;
+        //             break;
+        //         }else{
+        //             flag=true;
+        //         }
+        //     }
+        // }
+        // if(!flag2)
+        // cout<<"YES"<<endl;
+    }
+
+    return 0;
+}
