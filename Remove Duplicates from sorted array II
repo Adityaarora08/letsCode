@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int count=0;
+        int l=0,h=0;
+        while(h<(nums.size()-count) && l<=h){
+            while(h<nums.size() && nums[l]==nums[h]){
+                h++;
+            }
+            if(h-l==1){
+                l++;
+                // h++;
+            }else if(h-l==2){
+                l=h;
+            }else if(h-l>2){
+                count+=h-l-2;
+                int i=l+2;
+                int j=h;
+                while(j<nums.size()){
+                    nums[i]=nums[j];
+                    i++;j++;
+                }
+                while(i<nums.size()){
+                    nums[i]=0;
+                    i++;
+                }
+                l=l+2;
+                h=l;
+            }
+        }
+        cout<<count;
+        return nums.size()-count;
+
+    }
+};
