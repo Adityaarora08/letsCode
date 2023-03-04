@@ -1,0 +1,13 @@
+//Please star the repo if found helpful
+class Solution {
+public:
+    long long coloredCells(int n) {
+        if(n==1)return 1;
+        long long count=1;
+        n--;
+        for(int i=1;i<=n;i++){
+            count+=(4*i);
+        }
+        return count;
+    }
+};
