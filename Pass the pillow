@@ -1,0 +1,22 @@
+//Star the repo if found helpful
+class Solution {
+public:
+    int passThePillow(int n, int time) {
+        bool flag=false;
+        int k=1;
+        while(time){
+            if(flag){
+                k--;
+            }else{
+                k++;
+            }
+            if(k==n){
+                flag=true;
+            }else if(k==1){
+                flag=false;
+            }
+            time--;
+        }
+        return k;
+    }
+};
