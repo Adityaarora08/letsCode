@@ -1,0 +1,20 @@
+class Solution {
+public:
+    // static bool comparator(vector<int> &a,vector<int> &b){
+    //     return a[0]<b[0];
+    // }
+    int findMinArrowShots(vector<vector<int>>& points) {
+        sort(points.begin(),points.end());
+        int n=points.size();
+        int i=0,cnt=0;
+        while(i<n){
+            int mini=points[i][0];int maxi=points[i][1];
+            cnt++;
+            while(i<n && ((points[i][0]<=maxi && points[i][0]>=mini) || (points[i][1]<=maxi && points[i][1]>=mini))){
+                mini=min(points[i][0],mini),maxi=min(maxi,points[i][1]);
+                i++;
+            }
+        }
+        return cnt;
+    }
+};
