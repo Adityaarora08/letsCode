@@ -1,0 +1,71 @@
+//{ Driver Code Starts
+/* Driver program to test above function */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function Template for C++
+
+class Solution {
+public:
+    static bool comparator(int a,int b){
+        return a>b;
+    }
+    int minimumCostOfBreaking(vector<int> X, vector<int> Y, int m, int n){
+        //Write your code here
+        sort(X.begin(),X.end(),comparator);
+        sort(Y.begin(),Y.end(),comparator);
+        int hCount=1,vCount=1;
+        int cost=0;
+        int i=0,j=0;
+        while(i<X.size() && j<Y.size()){
+            if(X[i]>Y[j]){
+                cost+=X[i]*vCount;
+                hCount++;
+                i++;
+            }else{
+                cost+=Y[j]*hCount;
+                vCount++;
+                j++;
+            }
+        }
+        while(i<X.size()){
+            cost+=X[i]*vCount;
+            i++;
+        }
+         while(j<Y.size()){
+            cost+=Y[j]*hCount;
+            j++;
+        }
+        return cost;
+        
+    }
+};
+
+
+
+//{ Driver Code Starts.
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int m, n;
+	    cin >> m >> n;
+	    vector<int>X(m - 1), Y(n - 1);
+	    for(int i = 0; i < m - 1; i++){
+	        cin >> X[i];
+	    }
+	    for(int i = 0; i < n - 1; i++){
+	        cin >> Y[i];
+	    }
+	    Solution ob;
+	    int ans = ob.minimumCostOfBreaking(X, Y, m, n);
+	    cout << ans<<endl;
+	}
+	return 0;
+}
+
+// } Driver Code Ends
