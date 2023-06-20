@@ -1,0 +1,19 @@
+class Solution {
+public:
+    void dfs(int i,int j,int color,int prevColor,vector<vector<int>> &ans,int n,int m){
+        if(i<0 || j<0 || i>=n || j>=m)return;
+        ans[i][j]=color;
+        if(i>0 && ans[i-1][j]==prevColor)dfs(i-1,j,color,prevColor,ans,n,m);
+        if(j>0 && ans[i][j-1]==prevColor)dfs(i,j-1,color,prevColor,ans,n,m);
+        if(i<n-1 && ans[i+1][j]==prevColor)dfs(i+1,j,color,prevColor,ans,n,m);
+        if(j<m-1 && ans[i][j+1]==prevColor)dfs(i,j+1,color,prevColor,ans,n,m);
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        vector<vector<int>> ans=image;
+        if(image[sr][sc]==color)return image;
+        int n=image.size();
+        int m=image[0].size();
+        dfs(sr,sc,color,image[sr][sc],ans,n,m);
+        return ans;
+    }
+};
