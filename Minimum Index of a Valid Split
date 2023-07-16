@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int minimumIndex(vector<int>& nums) {
+        unordered_map<int,int> mp;
+        for(int i=0;i<nums.size();i++){
+            mp[nums[i]]++;
+        }
+        int dominant=0;
+        for(int i=0;i<nums.size();i++){
+            if(mp[nums[i]]*2>nums.size()){
+                dominant=nums[i];
+                break;
+            }
+        }
+        int count=0,dCount=0,ans=-1;
+        for(int i=0;i<nums.size();i++){
+            count++;
+            if(nums[i]==dominant)dCount++;
+            if(dCount*2>count){
+                ans=i;break;
+            }
+        }
+        if(ans==-1)return -1;
+        unordered_map<int,int> mp2;
+        for(int i=ans+1;i<nums.size();i++){
+            mp2[nums[i]]++;
+        }
+        int dominant2=0;
+        for(int i=ans+1;i<nums.size();i++){
+            if(mp2[nums[i]]*2>(nums.size()-(ans+1))){
+                dominant2=nums[i];
+                break;
+            }
+        }
+        if(dominant2==dominant)return ans;
+               return -1;
+    }
+};
