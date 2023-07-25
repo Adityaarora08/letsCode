@@ -1,3 +1,5 @@
+Longest Consecutive Sequence
+Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
